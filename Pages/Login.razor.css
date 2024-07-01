@@ -1,0 +1,60 @@
+﻿.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}    
+
+.login-box{
+    opacity: 0;
+    width: 300px;
+    padding: 20px;
+    border: 1px;
+    margin: 20px auto;
+    position: relative;
+    right: -10%;
+    animation: slideInFadeIn 0.5s forwards;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1)
+}
+
+    .login-box input[type="text"],
+    .login-box input[type="password"] {
+        width: 100%;
+        height: 40px;
+        padding: 10px;
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .login-box button {
+        width: auto; /* Adjust based on your design */
+        padding: 8px 10px;
+        border: none;
+        background-color: #007bff; /* Example color */
+        color: white;
+        cursor: pointer;
+        position: relative; /* Ensures it doesn’t stack strangely */
+        z-index: 1; /* Keeps it above input fields logically */
+    }
+
+@keyframes slideInFadeIn {
+    from {
+        right: -10%;
+        opacity: 0;
+    }
+
+    to {
+        right: 0;
+        opacity: 1;
+    }
+}
+
+@media (max-width: 600px) {
+    .login-box input[type="text"],
+    .login-box input[type="password"] {
+        width: 90%; /* Adjust width for smaller screens if necessary */
+        padding: 8px 10px; /* Maintain padding */
+    }
+}
+
