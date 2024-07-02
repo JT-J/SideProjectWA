@@ -1,6 +1,9 @@
-﻿@using System.ComponentModel.DataAnnotations;
-@page "/login"
-@inject IUserService UserService
+﻿@page "/login"
+@using System.ComponentModel.DataAnnotations;
+@using SideProjectWA.Models;
+@using SideProjectWA.Services;
+@inject SideProjectWA.Services.IUserService UserService
+
 
 <PageTitle>Log in</PageTitle>
 
@@ -35,15 +38,6 @@
 
     private async Task HandleValidSubmit()
     {
-        await UserService.SavedUserAcync(user);
-    }
-
-    public class UserModel
-    {
-        [Required]
-        public string Username { get; set; }
-
-        [Required]
-        public string Password { get; set; }
+        await UserService.SaveUserAsync(user);
     }
 }
