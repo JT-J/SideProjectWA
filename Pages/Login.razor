@@ -1,19 +1,49 @@
-﻿@page "/login"
+﻿@using System.ComponentModel.DataAnnotations;
+@page "/login"
+@inject IUserService UserService
 
 <PageTitle>Log in</PageTitle>
 
-
+<h1 class="text-center">Log in</h1>
 <div class="login-container">
-    <h1>Log in</h1>
     <div class="login-box">
-        <input type="text" placeholder="Username" style="width: 100%; height: 40px;">
-        <input type="password" placeholder="Password" style="width: 100%; height: 40px;">
-        <button type="submit">Log In</button>
-    </div>
+        <EditForm Model="user"
+            OnValidSubmit="HandleValidSubmit">
 
-    <p>Please log into continue</p>
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div>
+                <label for="username">Username</label>
+                <InputText id="username" @bind-value="user.Username" />
+            </div>
+
+            <div>
+                <label for="password">Password</label>
+                <InputText id="password" type="password" @bind-Value="user.Password" />
+            </div>
+
+            <button type="submit">Go!</button>
+        </EditForm>
+    </div>
 </div>
 
-@code {
+    <p>Please log into continue</p>
 
+@code {
+    private UserModel user = new UserModel();
+
+    private async Task HandleValidSubmit()
+    {
+        await UserService.SavedUserAcync(user);
+    }
+
+    public class UserModel
+    {
+        [Required]
+        public string Username { get; set; }
+
+        [Required]
+        public string Password { get; set; }
+    }
 }
