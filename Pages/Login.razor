@@ -2,7 +2,12 @@
 @using System.ComponentModel.DataAnnotations;
 @using SideProjectWA.Models;
 @using SideProjectWA.Services;
-@inject SideProjectWA.Services.IUserService UserService
+@inject SideProjectWA.Services.IUserService UserService;
+@using Microsoft.EntityFrameworkCore.Infrastructure;
+@using Microsoft.EntityFrameworkCore;
+@inject IDbContextFactory<UserContext> DbContextFactory;
+
+
 
 
 <PageTitle>Log in</PageTitle>
@@ -18,7 +23,7 @@
 
             <div>
                 <label for="username">Username</label>
-                <InputText id="username" @bind-value="user.Username" />
+                <InputText id="username" @bind-Value="user.Username" />
             </div>
 
             <div>
@@ -29,15 +34,16 @@
             <button type="submit">Go!</button>
         </EditForm>
     </div>
+    <p>Please log into continue</p>
 </div>
 
-    <p>Please log into continue</p>
 
 @code {
     private UserModel user = new UserModel();
 
     private async Task HandleValidSubmit()
     {
+        using var context = DbContextFactory.CreateDbContext();
         await UserService.SaveUserAsync(user);
     }
 }
