@@ -1,5 +1,11 @@
-﻿<h3>Landing_page</h3>
+﻿@page "/landing-page"
+
+<h3>Welcome, @Username</h3>
 
 @code {
+    private string userName;
 
+    protected override void OnInitialized(){
+        //retrieve user data as necessary
+    }
 }

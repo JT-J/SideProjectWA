@@ -44,6 +44,15 @@
     private async Task HandleValidSubmit()
     {
         using var context = DbContextFactory.CreateDbContext();
+        var isAuthenticated = await UserService.AuthenticaticateUserAsync(user);
+        if (isAuthenticated)
+        {
+            Navigation.NavigateTo("/landing-page");
+        }
+        else
+        {
+            
+        }
         await UserService.SaveUserAsync(user);
     }
 }

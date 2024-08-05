@@ -7,5 +7,9 @@ namespace SideProjectWA.Services
     public interface IUserService
     {
         Task SaveUserAsync(UserModel user);
+
+        Task<bool> AuthenticateUserAsync(string username, string password);
+
+        Task RegisterUserAsync(UserModel user);
     }
 }

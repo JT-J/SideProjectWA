@@ -18,5 +18,27 @@ namespace SideProjectWA.Services
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<bool> AuthenticateUserAsync(string username, string password)
+        {
+            var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.Username == username && u.Password == password);
+
+            return existingUser != null;
+        }
+
+        public async Task RegisterUserAsync(UserModel user)
+        {
+            var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.Username == user.Username);
+
+            if (existingUser == null)
+            {
+                _context.Users.Add(user);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                throw new SystemException("Username already exists");
+            }
+        }
     }
 }
