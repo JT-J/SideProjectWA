@@ -12,6 +12,7 @@
     padding: 10px;
     border: 1px;
     margin: 20px auto;
+    margin-bottom: 5px;
     position: relative;
     right: -10%;
     animation: slideInFadeIn 0.5s forwards;
@@ -36,6 +37,16 @@
         cursor: pointer;
         position: relative; /* Ensures it doesn’t stack strangely */
         z-index: 1; /* Keeps it above input fields logically */
+    }
+
+    p {
+        margin: 10px, 0;
+    }
+
+    .register-link{
+        display: block;
+        text-align: center;
+        margin-top: 10px;
     }
 
 @keyframes slideInFadeIn {

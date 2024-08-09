@@ -6,6 +6,8 @@
 @using Microsoft.EntityFrameworkCore.Infrastructure;
 @using Microsoft.EntityFrameworkCore;
 @inject IDbContextFactory<UserContext> DbContextFactory;
+@inject IUserService UserService;
+@inject NavigationManager Navigation;
 
 
 
@@ -34,7 +36,8 @@
             <button type="submit">Go!</button>
         </EditForm>
     </div>
-    <p>Please log into continue</p>
+    <p>Please log into continue or make a new account below:</p>
+    <a href="/register" class="register-link">Register</a>
 </div>
 
 
@@ -44,7 +47,7 @@
     private async Task HandleValidSubmit()
     {
         using var context = DbContextFactory.CreateDbContext();
-        var isAuthenticated = await UserService.AuthenticaticateUserAsync(user);
+        var isAuthenticated = await UserService.AuthenticateUserAsync(user.Username,user.Password);
         if (isAuthenticated)
         {
             Navigation.NavigateTo("/landing-page");
