@@ -1,0 +1,36 @@
+﻿@page "/register"
+@inject SideProjectWA.Services.IUserService UserService
+@inject NavigationManager Navigation;
+@using SideProjectWA.Models;
+@using System.ComponentModel.DataAnnotations;
+
+<PageTitle>Register</PageTitle>
+
+<h1>Register</h1>
+<EditForm Model="newUser" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div>
+        <label for="username">Username</label>
+        <InputText id="username" @bind-Value="newUser.Username" />
+    </div>
+
+    <div>
+        <label for="password">Password</label>
+        <InputText id="password" type="Password" @bind-Value="newUser.Password" />
+    </div>
+
+    <button type="submit">Register</button>
+
+</EditForm>
+
+@code {
+    private UserModel newUser = new UserModel();
+
+    private async Task HandleValidSubmit()
+    {
+        await UserService.RegisterUserAsync(newUser);
+        Navigation.NavigateTo("/login");
+    }
+}
